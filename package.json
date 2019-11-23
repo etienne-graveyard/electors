@@ -10,6 +10,9 @@
   "repository": "git+https://github.com/etienne-dldc/electors.git",
   "license": "ISC",
   "author": "Etienne Dldc",
+  "files": [
+    "dist"
+  ],
   "main": "dist/index.js",
   "module": "dist/electors.esm.js",
   "typings": "dist/index.d.ts",
