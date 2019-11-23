@@ -1,10 +1,18 @@
 import { getInternalState } from './globale';
 import { depsChanged } from './utils';
-import { DependencyList, InternalContext, MemoHookData, ElectorsContext, Selector } from './types';
+import {
+  DependencyList,
+  InternalContext,
+  MemoHookData,
+  ElectorsContext,
+  Selector,
+  Executor,
+} from './types';
 
 export const Electors = {
   createContext,
   useMemo,
+  useChildren,
 };
 
 function getCurrentContext(): InternalContext {
@@ -44,7 +52,9 @@ function afterRender(ctx: InternalContext) {
   ctx.hooks = ctx.nextHooks;
 }
 
-function createContext(): ElectorsContext {
+const DEFAULT_EXECUTOR: Executor = (selector, ...inputs) => selector(...inputs);
+
+function createContext(executor: Executor = DEFAULT_EXECUTOR): ElectorsContext {
   let destroyed = false;
 
   const context: ElectorsContext = {
@@ -53,6 +63,7 @@ function createContext(): ElectorsContext {
   };
 
   const internal: InternalContext = {
+    executor,
     context,
     hooks: null,
     nextHooks: [],
@@ -71,7 +82,7 @@ function createContext(): ElectorsContext {
       internal,
       () => {
         beforeRender(internal);
-        const result = selector(...inputs);
+        const result = executor(selector, ...inputs);
         afterRender(internal);
         return result;
       },
@@ -103,6 +114,14 @@ function useMemo<T>(factory: () => T, deps: DependencyList): T {
   }
   setCurrentHook(hook);
   return hook.result;
+}
+
+function useChildren<Inputs extends Array<any>, Output>(
+  selector: Selector<Inputs, Output>,
+  ...inputs: Inputs
+): Output {
+  const context = getCurrentContext();
+  return context.executor(selector, ...inputs);
 }
 
 function withGlobalContext<T>(

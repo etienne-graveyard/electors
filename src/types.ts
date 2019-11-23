@@ -15,7 +15,13 @@ export type MemoHookData = {
   result: any;
 };
 
+export type Executor = <Inputs extends Array<any>, Output>(
+  selector: Selector<Inputs, Output>,
+  ...inputs: Inputs
+) => Output;
+
 export interface InternalContext {
+  executor: Executor;
   context: ElectorsContext;
   hooks: Array<MemoHookData> | null;
   nextHooks: Array<MemoHookData>;
@@ -24,18 +30,3 @@ export interface InternalContext {
 export interface InternalState {
   current: InternalContext | null;
 }
-
-// =========
-
-// export interface MemoTools {
-//   memo<Output>(selector: () => Output, deps: ReadonlyArray<any>): Output;
-//   globalMemo<Output>(
-//     key: any,
-//     selector: () => Output,
-//     deps: ReadonlyArray<any>
-//   ): Output;
-//   execute<Inputs extends Array<any>, Output>(
-//     selector: Selector<Inputs, Output>,
-//     ...inputs: Inputs
-//   ): Output;
-// }
