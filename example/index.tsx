@@ -32,7 +32,7 @@ const useVisibleTodos = (state: State): Todo[] => {
 
 // you use other selectors
 const useVisibleTodosSorted = (state: State, order: 'acs' | 'desc'): Todo[] => {
-  const visibleTodos = useVisibleTodos(state);
+  const visibleTodos = React.useChildren(useVisibleTodos, state);
   return React.useMemo(() => {
     return order === 'acs'
       ? visibleTodos.slice().sort((l, r) => l.title.localeCompare(r.title))
