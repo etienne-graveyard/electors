@@ -1,5 +1,4 @@
-// import as React to get eslint !
-import React from '../src';
+import Electors, { useMemo, useChildren } from '../src';
 
 /**
  * TYPES
@@ -22,7 +21,7 @@ interface State {
  */
 
 const useVisibleTodos = (state: State): Todo[] => {
-  return React.useMemo(() => {
+  return useMemo(() => {
     if (state.hideDone) {
       return state.todos.filter(t => t.done === false);
     }
@@ -32,8 +31,8 @@ const useVisibleTodos = (state: State): Todo[] => {
 
 // you use other selectors
 const useVisibleTodosSorted = (state: State, order: 'acs' | 'desc'): Todo[] => {
-  const visibleTodos = React.useChildren(useVisibleTodos, state);
-  return React.useMemo(() => {
+  const visibleTodos = useChildren(useVisibleTodos, state);
+  return useMemo(() => {
     return order === 'acs'
       ? visibleTodos.slice().sort((l, r) => l.title.localeCompare(r.title))
       : visibleTodos.slice().sort((l, r) => r.title.localeCompare(l.title));
@@ -44,7 +43,7 @@ const useVisibleTodosSorted = (state: State, order: 'acs' | 'desc'): Todo[] => {
  * Create a context
  * A context is a bit like a component
  */
-const ctx = React.createContext();
+const ctx = Electors.createContext();
 
 const state1: State = {
   todos: [
