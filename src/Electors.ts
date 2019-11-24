@@ -54,7 +54,7 @@ function afterRender(ctx: InternalContext) {
 
 const DEFAULT_EXECUTOR: Executor = (selector, ...inputs) => selector(...inputs);
 
-function createContext(executor: Executor = DEFAULT_EXECUTOR): ElectorsContext {
+export function createContext(executor: Executor = DEFAULT_EXECUTOR): ElectorsContext {
   let destroyed = false;
 
   const context: ElectorsContext = {
@@ -98,7 +98,7 @@ function createContext(executor: Executor = DEFAULT_EXECUTOR): ElectorsContext {
   }
 }
 
-function useMemo<T>(factory: () => T, deps: DependencyList): T {
+export function useMemo<T>(factory: () => T, deps: DependencyList): T {
   const hook = getCurrentHook();
   if (hook === null) {
     const memoHook: MemoHookData = {
@@ -116,7 +116,7 @@ function useMemo<T>(factory: () => T, deps: DependencyList): T {
   return hook.result;
 }
 
-function useChildren<Inputs extends Array<any>, Output>(
+export function useChildren<Inputs extends Array<any>, Output>(
   selector: Selector<Inputs, Output>,
   ...inputs: Inputs
 ): Output {
