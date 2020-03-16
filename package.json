@@ -25,7 +25,7 @@
     "lint": "tsdx lint",
     "pub": "yarn build && np",
     "start": "tsdx watch",
-    "test": "tsdx test",
+    "test": "tsdx test --coverage",
     "test:watch": "tsdx test --watch"
   },
   "husky": {
@@ -40,11 +40,11 @@
     "trailingComma": "es5"
   },
   "devDependencies": {
-    "@types/jest": "^24.0.22",
-    "husky": "^4.2.1",
+    "@types/jest": "^25.1.4",
+    "husky": "^4.2.3",
     "np": "^5.2.1",
     "tsdx": "^0.12.3",
-    "tslib": "^1.10.0",
-    "typescript": "^3.7.5"
+    "tslib": "^1.11.1",
+    "typescript": "^3.8.3"
   }
 }
