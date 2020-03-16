@@ -8,11 +8,11 @@
     "build": "parcel build index.html"
   },
   "dependencies": {
-    "immer": "^5.0.0",
-    "suub": "^1.4.2"
+    "immer": "^6.0.2",
+    "suub": "^2.0.3"
   },
   "devDependencies": {
     "parcel": "^1.12.3",
-    "typescript": "^3.4.5"
+    "typescript": "^3.8.3"
   }
 }
