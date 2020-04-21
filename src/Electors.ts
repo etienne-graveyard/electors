@@ -1,4 +1,4 @@
-import { getInternalState } from './globale';
+import { getInternalState } from './global';
 import { depsChanged } from './utils';
 import {
   DependencyList,
@@ -18,7 +18,7 @@ export const Electors = {
 function getCurrentContext(): InternalContext {
   const state = getInternalState().current;
   if (state === null) {
-    throw new Error(`Hooks used outside of render !`);
+    throw new Error(`Elector used outside of ctx.execute !`);
   }
   return state;
 }
