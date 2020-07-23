@@ -1,4 +1,4 @@
-import Electors, { useMemo, useChildren } from '../src';
+import { createContext, useMemo, useChildren } from '../src';
 
 /**
  * TYPES
@@ -43,7 +43,7 @@ const useVisibleTodosSorted = (state: State, order: 'acs' | 'desc'): Todo[] => {
  * Create a context
  * A context is a bit like a component
  */
-const ctx = Electors.createContext();
+const ctx = createContext();
 
 const state1: State = {
   todos: [

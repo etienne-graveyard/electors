@@ -9,12 +9,6 @@ import {
   Executor,
 } from './types';
 
-export const Electors = {
-  createContext,
-  useMemo,
-  useChildren,
-};
-
 function getCurrentContext(): InternalContext {
   const state = getInternalState().current;
   if (state === null) {

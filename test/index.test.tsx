@@ -1,4 +1,4 @@
-import Electors, { useMemo, useChildren } from '../src';
+import { useMemo, useChildren, createContext } from '../src';
 
 /**
  * TYPES
@@ -44,7 +44,7 @@ test('electors is working', () => {
    * Create a context
    * A context is a bit like a component
    */
-  const ctx = Electors.createContext();
+  const ctx = createContext();
 
   const state1: State = {
     todos: [
